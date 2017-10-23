@@ -1,60 +1,36 @@
 (ns customer-ui.views
-  (:require [re-frame.core :as re-frame]
-            [re-com.core :as re-com]
-            [customer-ui.routes :as routes]))
-
-;; home
-(defn home-title []
-  (let [name (re-frame/subscribe [:name])]
-    (fn []
-      [re-com/title
-       :label (str "Hello from " @name ". This is the Home Page.")
-       :level :level1])))
-
-(defn link-to-about-page []
-  [re-com/hyperlink-href
-   :label "go to About Page"
-   :href (routes/about)])
+  (:require [re-frame.core :as rf]
+            [re-com.core :as rc]
+            [customer-ui.layout :refer [page-layout]]))
 
 (defn home-panel []
-  [re-com/v-box
-   :height "100%"
-   :class "app"
-   :children
-   [[:div
-     "Hello World"
-     [home-title]]]
-])
+  [page-layout
+   [rc/v-box
+    :children
+    [[:h1 {:class "f1"} "Nice meeting you,"]
+     [:p "I'm Leo Urbina. I love building products that have an impact in peoples lives. Whether at a startup or a large company, I love helping teams grow and achieve their goals."]
+     [:p "Previously I was a tech lead at Drift, HubSpot, and the first engineer at BitSight."]
+     [:p "Currently I'm starting my own consulting agency, helping companies navigate the technical landscape, and building world class products."]
+     ]]])
 
-;; about
-(defn about-title []
-  [re-com/title
-   :label "This is the About Page."
-   :level :level1])
-
-(defn link-to-home-page []
-  [re-com/hyperlink-href
-   :label "go to Home Page"
-   :href (routes/home)])
-
-(defn about-panel []
-  [re-com/v-box
-   :gap "1em"
-   :children [[about-title] [link-to-home-page]]])
+(defn project-panel []
+  [page-layout "These are my projects"])
 
 ;; main
 (defn- panels [panel-name]
   (case panel-name
     :home-panel [home-panel]
-    :about-panel [about-panel]
-    [:div]))
+    :projects-panel [project-panel]
+    [:div "Page not found"])) ;; TODO: add real 404
 
 (defn show-panel [panel-name]
   [panels panel-name])
 
 (defn main-panel []
-  (let [active-panel (re-frame/subscribe [:active-panel])]
+  (let [active-panel (rf/subscribe [:active-panel])]
     (fn []
-      [re-com/v-box
+      [rc/v-box
        :height "100%"
+       :align :center
        :children [[panels @active-panel]]])))
+

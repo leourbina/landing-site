@@ -4,13 +4,14 @@
                  [reagent "0.7.0"]
                  [re-frame "0.10.1"]
                  [org.clojure/core.async "0.2.391"]
+                 [venantius/accountant "0.2.0"]
                  [re-com "2.1.0"]
                  [secretary "1.2.3"]
                  [garden "1.3.2"]
                  [ns-tracker "0.3.0"]]
 
   :plugins [[lein-cljsbuild "1.1.5"]
-            [lein-garden "0.2.8"]]
+            [lein-scss  "0.3.0" ]]
 
   :min-lein-version "2.5.3"
 
@@ -23,11 +24,23 @@
   :figwheel {:css-dirs ["resources/public/css"]
              :ring-handler customer-ui.server/handler}
 
-  :garden {:builds [{:id           "screen"
-                     :source-paths ["src/clj"]
-                     :stylesheet   customer-ui.css/screen
-                     :compiler     {:output-to     "resources/public/css/screen.css"
-                                    :pretty-print? true}}]}
+  :hooks [leiningen.scss
+          leiningen.cljsbuild]
+  
+  :scss {:builds
+         {:dev        {:source-dir "resources/scss/"
+                       :dest-dir   "resources/public/css/"
+                       :executable "sassc"
+                       :args       ["-m" "-I" "scss/" "-t" "nested"]}
+          :prod {:source-dir "resources/scss/"
+                 :dest-dir   "resources/public/css/"
+                 :executable "sassc"
+                 :args       ["-I" "scss/" "-t" "compressed"]
+                 :jar        true}
+          :test       {:source-dir "tests/scss/"
+                       :dest-dir   "/tmp/test/css/"
+                       :executable "sassc"
+                       :args       ["-m" "-I" "scss/" "-t" "nested"]}}}
 
   :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
 
@@ -36,15 +49,16 @@
    {:dependencies [[binaryage/devtools "0.9.4"]
                    [figwheel-sidecar "0.5.13"]
                    [com.cemerick/piggieback "0.2.2"]
-                   [re-frisk "0.5.0"]]
+                   [re-frisk "0.5.0"]
+                   [doo "0.1.8"]]
 
     :plugins      [[lein-figwheel "0.5.13"]
                    [lein-doo "0.1.8"]]}}
 
   :cljsbuild
   {:builds
-   [{:id           "dev"
-     :source-paths ["src/cljs"]
+   {:dev
+    {:source-paths ["src/cljs"]
      :figwheel     {:on-jsload "customer-ui.core/mount-root"}
      :compiler     {:main                 customer-ui.core
                     :output-to            "resources/public/js/compiled/app.js"
@@ -56,20 +70,18 @@
                     :external-config      {:devtools/config {:features-to-install :all}}
                     }}
 
-    {:id           "min"
-     :source-paths ["src/cljs"]
+    :prod
+    {:source-paths ["src/cljs"]
      :compiler     {:main            customer-ui.core
                     :output-to       "resources/public/js/compiled/app.js"
                     :optimizations   :advanced
                     :closure-defines {goog.DEBUG false}
                     :pretty-print    false}}
 
-    {:id           "test"
-     :source-paths ["src/cljs" "test/cljs"]
+    :test
+    {:source-paths ["src/cljs" "test/cljs"]
      :compiler     {:main          customer-ui.runner
                     :output-to     "resources/public/js/compiled/test.js"
                     :output-dir    "resources/public/js/compiled/test/out"
                     :optimizations :none}}
-    ]}
-
-  )
+    }})

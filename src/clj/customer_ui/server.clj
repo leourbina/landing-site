@@ -5,7 +5,8 @@
 (defn- wrap-default-index [next-handler]
   (fn [request]
     (next-handler
-      (if (or (starts-with? (:uri request) "/css/")
+      (if (or (starts-with? (:uri request) "/images/")
+              (starts-with? (:uri request) "/css/")
               (starts-with? (:uri request) "/js/"))
         request
         (assoc request :uri "/index.html")))))

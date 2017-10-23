@@ -6,6 +6,7 @@
   (:require [secretary.core :as secretary]
             [goog.events :as events]
             [goog.history.EventType :as EventType]
+            [accountant.core :as accountant]
             [re-frame.core :as rf]))
 
 (defn hook-browser-navigation! []
@@ -30,11 +31,16 @@
   ;;(secretary/set-config! :prefix "#")
   ;; --------------------
   ;; define routes here
+
   (defroute home "/" []
     (rf/dispatch [:set-active-panel :home-panel]))
 
-  (defroute about "/about" []
-    (rf/dispatch [:set-active-panel :about-panel]))
+  (defroute projects "/projects" []
+    (rf/dispatch [:set-active-panel :projects-panel]))
 
   ;; --------------------
-  (hook-browser-navigation!))
+  (accountant/configure-navigation! {:nav-handler (fn [path] (do
+                                                               (secretary/dispatch! path)))
+                                     :path-exists? (fn [path] (secretary/locate-route path))})
+  (accountant/dispatch-current!))
+

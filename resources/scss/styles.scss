@@ -1,0 +1,91 @@
+$font-stack: Helvetica, sans-serif;
+$light-gray: #ECECEC;
+$medium-gray: #979797;
+$primary-color: #515151;
+
+body {
+  font-size: 16px;
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+a {
+  &:hover {
+    text-decoration: none;    
+  }
+}
+
+.f2.name {
+  margin: 0;
+}
+
+
+.main-content {
+  max-width: 940px;
+  min-width: 600px;
+  height: 100%;
+  width: 80%;
+  padding: 1rem;
+}
+
+.content-body {
+  p {
+    line-height: 2;
+  }
+}
+
+.main-header {
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid $medium-gray;
+}
+
+.nav {
+  padding-top: 3.5rem;
+}
+
+.nav-button {
+  height: 2.5rem;
+  border-radius: 0.325rem;
+  margin-left: 0.25rem;
+  padding: 0.5rem 1rem;
+  transition: background-color 300ms ease;
+  
+  a {
+    font-size: 1.25rem;
+    color: $primary-color;
+
+    &:focus {
+      text-decoration: none;
+    }
+  }
+
+  &.active {
+    background-color: $light-gray;    
+  }
+  
+  &:hover {
+    cursor: pointer;
+    background-color: $light-gray;
+  }
+}
+
+img.profile-image {
+  max-width: 100px;
+  max-height: 87px;
+  width: auto;
+  height: auto;
+  border-radius: 0.325rem;
+  margin-right: 1.25rem;
+}
+
+.social-links {
+  margin-top: 0.5rem;
+  font-size: 1.25rem;
+  width: 5rem;
+
+  .fa-envelope {
+    margin-top: -1px;
+    margin-left: 2px;
+  }
+}
+
