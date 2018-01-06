@@ -7,21 +7,31 @@
   [page-layout
    [rc/v-box
     :children
-    [[:h1 {:class "f1"} "Nice meeting you,"]
-     [:p "I'm Leo Urbina. I love building products that have an impact in peoples lives. Whether at a startup or a large company, I love helping teams grow and achieve their goals."]
-     [:p "Previously I was a tech lead at Drift, HubSpot, and the first engineer at BitSight."]
-     [:p "Currently I'm starting my own consulting agency, helping companies navigate the technical landscape, and building world class products."]
-     ]]])
+    [[:h1 {:class "f1"} "Hey, nice to meet you"]
+     [:p {:class "f4"} "I'm Leo Urbina. I'm a full-stack engineer, with a nack for building products that have an impact on people's lives. Whether at a startup or a large company, I love helping teams grow and achieve their goals."]
+     [:p {:class "f4"} "huh"]
+     [:p "In the past I've been at Drift, HubSpot and BitSight."]]]])
 
 (defn project-panel []
-  [page-layout "These are my projects"])
+  [page-layout
+   [rc/v-box
+    [:children
+     [:h1 {:class "f1"} "Projects"]
+     [:p "Here are some of my projects"]]]])
+
+(defn not-found-panel []
+  [page-layout
+   [:div
+    [:h1 {:class "f1"} "Hmm, this isn't right"]
+    [:p "We couldn't find the page you're looking for. No fret! Just click one of the links above ☝"]]])
 
 ;; main
 (defn- panels [panel-name]
   (case panel-name
     :home-panel [home-panel]
     :projects-panel [project-panel]
-    [:div "Page not found"])) ;; TODO: add real 404
+    
+    [not-found-panel])) ;; TODO: add real 404
 
 (defn show-panel [panel-name]
   [panels panel-name])
