@@ -7,8 +7,8 @@
                  [venantius/accountant "0.2.0"]
                  [re-com "2.1.0"]
                  [secretary "1.2.3"]
-                 [garden "1.3.2"]
-                 [ns-tracker "0.3.0"]]
+                 [ns-tracker "0.3.0"]
+                 [org.clojars.borkdude/cljs-time "0.5.0-SNAPSHOT"]]
 
   :plugins [[lein-cljsbuild "1.1.5"]
             [lein-scss  "0.3.0" ]]
@@ -26,7 +26,7 @@
 
   :hooks [leiningen.scss
           leiningen.cljsbuild]
-  
+
   :scss {:builds
          {:dev        {:source-dir "resources/scss/"
                        :dest-dir   "resources/public/css/"

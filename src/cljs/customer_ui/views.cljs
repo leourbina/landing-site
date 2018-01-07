@@ -23,7 +23,7 @@
   [page-layout
    [:div
     [:h1 {:class "f1"} "Hmm, this isn't right"]
-    [:p "We couldn't find the page you're looking for. No fret! Just click one of the links above ☝"]]])
+    [:p "We couldn't find the page you're looking for. No fret! Just click one of the links above 👆🏾"]]])
 
 ;; main
 (defn- panels [panel-name]

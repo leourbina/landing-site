@@ -1,34 +1,19 @@
-# customer-ui
-
-A [re-frame](https://github.com/Day8/re-frame) application designed to ... well, that part is up to you.
+# Leo's landing site
 
 ## Development Mode
 
-### Start Cider from Emacs:
-
-Put this in your Emacs config file:
-
-```
-(setq cider-cljs-lein-repl
-	"(do (require 'figwheel-sidecar.repl-api)
-         (figwheel-sidecar.repl-api/start-figwheel!)
-         (figwheel-sidecar.repl-api/cljs-repl))")
-```
-
-Navigate to a clojurescript file and start a figwheel REPL with `cider-jack-in-clojurescript` or (`C-c M-J`)
-
-### Compile css:
+### Compile scss:
 
 Compile css file once.
 
 ```
-lein garden once
+lein scss once :dev
 ```
 
 Automatically recompile css file on change.
 
 ```
-lein garden auto
+lein scss auto :dev
 ```
 
 ### Run application:
@@ -57,6 +42,7 @@ The above command assumes that you have [phantomjs](https://www.npmjs.com/packag
 To compile clojurescript to javascript:
 
 ```
-lein clean
-lein cljsbuild once min
+lein do clean, scss once :prod, cljsbuild once prod
 ```
+
+The build will be under the `resources/public` directory.
