@@ -7,6 +7,7 @@
             [customer-ui.views :as views]
             [customer-ui.config :as config]))
 
+(enable-console-print!)
 
 (defn dev-setup []
   (when config/debug?

@@ -18,7 +18,7 @@
                   (.setUseFragment false)
                   (.setPathPrefix "")
                   (.setEnabled true))]
-    
+
     (events/listen js/document "click"
                    (fn [e]
                      (. e preventDefault)
@@ -28,14 +28,12 @@
                          (. history (setToken path title))))))))
 
 (defn app-routes []
-  ;;(secretary/set-config! :prefix "#")
-  ;; --------------------
   ;; define routes here
 
   (defroute home "/" []
     (rf/dispatch [:set-active-panel :home-panel]))
 
-  (defroute projects "/projects" []
+  #_(defroute projects "/projects" []
     (rf/dispatch [:set-active-panel :projects-panel]))
 
   ;; --------------------
@@ -43,4 +41,3 @@
                                                                (secretary/dispatch! path)))
                                      :path-exists? (fn [path] (secretary/locate-route path))})
   (accountant/dispatch-current!))
-

@@ -65,8 +65,8 @@
      :class "nav"
      :children
      [[nav-button "About Me" (routes/home)]
-      [nav-button "Projects" (routes/projects)]
-      [nav-button "Blog" "https://blog.leourbina.com" "_blank"]]]]]) 
+      #_[nav-button "Projects" (routes/projects)]
+      [nav-button "Blog" "https://blog.leourbina.com" "_blank"]]]]])
 
 (defn page-layout [contents]
   [rc/v-box
@@ -74,8 +74,4 @@
    :size "100vh"
    :children
    [[header]
-    [rc/box :child contents :class "content-body"]]]) 
-
-
-
-
+    [rc/box :child contents :class "content-body"]]])
