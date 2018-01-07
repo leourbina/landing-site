@@ -11,7 +11,7 @@ body {
 
 a {
   &:hover {
-    text-decoration: none;    
+    text-decoration: none;
   }
 }
 
@@ -49,7 +49,7 @@ a {
   margin-left: 0.25rem;
   padding: 0.5rem 1rem;
   transition: background-color 300ms ease;
-  
+
   a {
     font-size: 1.25rem;
     color: $primary-color;
@@ -60,9 +60,9 @@ a {
   }
 
   &.active {
-    background-color: $light-gray;    
+    background-color: $light-gray;
   }
-  
+
   &:hover {
     cursor: pointer;
     background-color: $light-gray;
@@ -88,4 +88,3 @@ img.profile-image {
     margin-left: 2px;
   }
 }
-
